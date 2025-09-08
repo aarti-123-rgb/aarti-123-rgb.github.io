@@ -1,0 +1,110 @@
+<?php
+include('header.php');
+include('sidebar.php');
+include('db.php');
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Orders - Electronics Shop</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f7f9fc;
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #3498db;
+      color: white;
+    }
+    tr:hover {
+      background-color: #f1f7fb;
+    }
+    .status {
+      padding: 5px 10px;
+      border-radius: 15px;
+      color: white;
+      font-weight: bold;
+      font-size: 0.9rem;
+      display: inline-block;
+    }
+    .status.pending { background-color: #f39c12; }
+    .status.completed { background-color: #27ae60; }
+    .status.cancelled { background-color: #e74c3c; }
+
+    button {
+      background-color: #2980b9;
+      border: none;
+      padding: 8px 12px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #1c5980;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🛒 Orders List</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Product Name</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total (₹)</th>
+      <th>Order Time</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+    $result = $conn->query("SELECT * FROM orders_new ORDER BY order_time DESC");
+    $i = 1;
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>
+                <td>{$i}</td>
+                <td>{$row['product_name']}</td>
+                <td>₹{$row['price']}</td>
+                <td>{$row['quantity']}</td>
+                <td>₹{$row['total_amount']}</td>
+                <td>{$row['order_time']}</td>
+                <td><span class='status pending'>Pending</span></td>
+                <td><button onclick=\"alert('View Order ID: {$i}')\">View</button></td>
+              </tr>";
+        $i++;
+    }
+    ?>
+  </tbody>
+</table>
+
+</body>
+</html>
+

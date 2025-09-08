@@ -1,0 +1,18 @@
+<?php
+include('db.php');
+
+if (!isset($_GET['id'])) {
+  die("Order ID is missing.");
+}
+
+$id = intval($_GET['id']);
+
+$stmt = $conn->prepare("DELETE FROM orders_new WHERE id = ?");
+$stmt->bind_param("i", $id);
+
+if ($stmt->execute()) {
+  echo "<script>alert('Order deleted successfully!'); window.location.href='orders.php';</script>";
+} else {
+  echo "<p style='color:red;'>Failed to delete order.</p>";
+}
+?>

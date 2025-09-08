@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add Product</title>
+
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+    /* ==== Background Styling with Floating Balloons ==== */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #fceabb, #f8b500);
+      animation: bgAnimation 15s ease infinite;
+      position: relative;
+    }
+
+    @keyframes bgAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ==== Balloons Floating ==== */
+    .balloon {
+      position: absolute;
+      bottom: -100px;
+      width: 60px;
+      height: 80px;
+      background: radial-gradient(circle at 30% 30%, #ff6b6b, #ff4757);
+      border-radius: 50% 50% 50% 50%;
+      animation: float 12s infinite ease-in;
+      opacity: 0.8;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 20px;
+      background: #333;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-120vh) rotate(360deg);
+      }
+    }
+
+    .balloon:nth-child(1) {
+      left: 10%;
+      animation-delay: 0s;
+    }
+    .balloon:nth-child(2) {
+      left: 30%;
+      animation-delay: 2s;
+      background: radial-gradient(circle at 30% 30%, #1dd1a1, #10ac84);
+    }
+    .balloon:nth-child(3) {
+      left: 50%;
+      animation-delay: 4s;
+      background: radial-gradient(circle at 30% 30%, #54a0ff, #2e86de);
+    }
+    .balloon:nth-child(4) {
+      left: 70%;
+      animation-delay: 1s;
+      background: radial-gradient(circle at 30% 30%, #f368e0, #ee5253);
+    }
+    .balloon:nth-child(5) {
+      left: 90%;
+      animation-delay: 3s;
+      background: radial-gradient(circle at 30% 30%, #ff9f43, #ff6f00);
+    }
+
+    /* ==== Form Card Styling ==== */
+    .form-card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+      z-index: 2;
+      position: relative;
+      backdrop-filter: blur(6px);
+    }
+
+    .form-title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: #444;
+    }
+
+    .btn-submit {
+      background: linear-gradient(to right, #26c6da, #42a5f5);
+      border: none;
+      color: white;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      width: 100%;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(to right, #42a5f5, #26c6da);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 576px) {
+      .form-card {
+        padding: 25px;
+      }
+
+      .form-title {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Balloons -->
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+
+  <!-- Product Form -->
+  <div class="form-card">
+    <div class="form-title">🎈 Add New Product</div>
+    <form action="edit_order.php" method="POST">
+      <div class="mb-3">
+        <label for="name" class="form-label">Product Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="e.g. iPhone 15" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price (₹)</label>
+        <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="e.g. 69999" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Image URL</label>
+        <input type="text" class="form-control" id="image" name="image" placeholder="https://example.com/image.jpg" required />
+      </div>
+
+      <button type="submit" class="btn btn-submit mt-3">➕ Add Product</button>
+    </form>
+  </div>
+
+</body>
+</html>
+
+
+
+
